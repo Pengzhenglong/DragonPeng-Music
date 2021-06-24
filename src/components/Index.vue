@@ -54,14 +54,19 @@ export default {
   background-color: aliceblue;
 }
 .index .nav ul{
-  width:200px
+  width:200px;
+  margin: 0;
+  padding: 0;
+  border: 0;
 }
 .index  .nav  li{
   list-style: none;
-  line-height: 30px;
-  text-align: center;
-margin:10px;
+ overflow: hidden;
+ text-overflow: ellipsis;
+ white-space: nowrap;
 
+padding: .85714rem  1.28571rem;
+cursor: pointer;
 }
 
 .router-link-active{
