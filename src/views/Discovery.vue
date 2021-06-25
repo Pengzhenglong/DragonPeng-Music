@@ -23,6 +23,44 @@
         </div>
       </div>
     </div>
+    <!-- 最新音乐 -->
+    <div class="news">
+      <h3 class="title">最新音乐</h3>
+      <div class="songs">
+        <!--v-for -->
+        <div class="items" v-for="(item, index) in news" :key="index">
+          <div class="num">
+            <span>{{ item.id }}</span>
+          </div>
+          <div class="right">
+            <div class="img-a">
+              <img :src="item.image" alt="" />
+            </div>
+            <div class="right-r">
+              <div>{{ item.name }}</div>
+              <div>{{ item.songsname }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- mvs -->
+    <div class="mvs">
+      <h3 class="title">推荐MV</h3>
+      <div class="mv">
+        <div class="items" v-for="(item, index) in mvs" :key="index">
+          <div class="right">
+            <div class="img-a">
+              <img :src="item.image" alt="" />
+            </div>
+          </div>
+          <div class="right-r">
+            <div>{{ item.name }}</div>
+            <div>{{ item.songername }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -101,6 +139,66 @@ export default {
           image: 'http://p1.music.126.net/cxAKlTtOS3kzcqpL_KvfvQ==/109951166114869532.jpg'
         },
       ],
+      news: [
+        {
+          id: '01',
+          image: 'http://p3.music.126.net/RwqmaJNBVr2PAccGWfMEVw==/109951166111591316.jpg?param=120y120',
+          name: '买花的人',
+          songsname: '魏如轩/鲜于钲二'
+        },
+        {
+          id: '01',
+          image: 'http://p3.music.126.net/RwqmaJNBVr2PAccGWfMEVw==/109951166111591316.jpg?param=120y120',
+          name: '买花的人',
+          songsname: '魏如轩/鲜于钲二'
+        },
+        {
+          id: '01',
+          image: 'http://p3.music.126.net/RwqmaJNBVr2PAccGWfMEVw==/109951166111591316.jpg?param=120y120',
+          name: '买花的人',
+          songsname: '魏如轩/鲜于钲二'
+        },
+        {
+          id: '01',
+          image: 'http://p3.music.126.net/RwqmaJNBVr2PAccGWfMEVw==/109951166111591316.jpg?param=120y120',
+          name: '买花的人',
+          songsname: '魏如轩/鲜于钲二'
+        },
+        {
+          id: '01',
+          image: 'http://p3.music.126.net/RwqmaJNBVr2PAccGWfMEVw==/109951166111591316.jpg?param=120y120',
+          name: '买花的人',
+          songsname: '魏如轩/鲜于钲二'
+        },
+        {
+          id: '01',
+          image: 'http://p3.music.126.net/RwqmaJNBVr2PAccGWfMEVw==/109951166111591316.jpg?param=120y120',
+          name: '买花的人',
+          songsname: '魏如轩/鲜于钲二'
+        },
+      ],
+      mvs: [
+        {
+          image: 'https://p2.music.126.net/e5FlRtdhRCA0PLat7dgDlQ==/109951166117884028.jpg',
+          name: 'Need Some of That (Live)',
+          songername: 'Weezer'
+        },
+        {
+          image: 'https://p2.music.126.net/e5FlRtdhRCA0PLat7dgDlQ==/109951166117884028.jpg',
+          name: 'Need Some of That (Live)',
+          songername: 'Weezer'
+        },
+        {
+          image: 'https://p2.music.126.net/e5FlRtdhRCA0PLat7dgDlQ==/109951166117884028.jpg',
+          name: 'Need Some of That (Live)',
+          songername: 'Weezer'
+        },
+        {
+          image: 'https://p2.music.126.net/e5FlRtdhRCA0PLat7dgDlQ==/109951166117884028.jpg',
+          name: 'Need Some of That (Live)',
+          songername: 'Weezer'
+        },
+      ]
     }
   }
 }
@@ -120,12 +218,7 @@ export default {
     }
   }
   .recommend {
-    .title {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 18.72px;
-      margin: 0 0 20px;
-      padding: 0 0 0 0px;
-    }
+    margin-bottom: 30px;
     .box {
       display: flex;
       flex-wrap: wrap;
@@ -179,5 +272,43 @@ export default {
       }
     }
   }
+  .news .songs {
+    display: flex;
+    flex-wrap: wrap;
+    .items {
+      background-color: #f5fef5;
+      color: #4a4a4a;
+      display: flex;
+      width: 50%;
+      .right {
+        display: flex;
+        .right-r {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+        }
+      }
+    }
+  }
+  .mvs .mv {
+    display: flex;
+    justify-content: space-between;
+    .items {
+
+      .right  {
+        width:250px;
+        height: 140.5px;
+        .img-a  img{
+          width:100%
+        }
+      }
+    }
+  }
+}
+.title {
+  font-weight: 400;
+  font-size: 18.72px;
+  margin: 0 0 20px;
+  padding: 0 0 0 0px;
 }
 </style>
