@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mvs" >
 <img src="../assets/mvs.png" alt="">
 
   </div>
@@ -12,5 +12,8 @@ export default {
 </script>
 
 <style>
-
+.mvs{
+    max-width: 1100px;
+  margin: 0 auto;
+}
 </style>

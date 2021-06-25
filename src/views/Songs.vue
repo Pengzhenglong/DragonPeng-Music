@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div  class="songs">
    <img src="../assets/songs.png" alt="">
   </div>
 </template>
@@ -11,5 +11,8 @@ export default {
 </script>
 
 <style>
-
+      .songs{
+          max-width: 1100px;
+  margin: 0 auto;
+      }
 </style>

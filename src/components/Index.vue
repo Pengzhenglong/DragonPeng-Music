@@ -1,5 +1,6 @@
 <template>
   <div class="index">
+    <div  class="left">
     <div class="nav">
       <ul>
  
@@ -23,7 +24,7 @@
           </router-link>
   
       </ul>
-    </div>
+    </div></div>
     <div class="main">
    <router-view/>
     </div>
@@ -46,12 +47,19 @@ export default {
 </script>
 <style>
 .index{
+ margin-top:46px;
   display: flex;
   height: 830px;
 }
+.index  .left{
+  width: 200px;
+    background-color: aliceblue; 
+}
 .index .nav{ 
   width: 200px;
-  background-color: aliceblue;
+
+    position: fixed;
+
 }
 .index .nav ul{
   width:200px;
@@ -73,7 +81,7 @@ cursor: pointer;
   color:red
 }
 .main{
-
+z-index: 1000;
   flex:1;
 }
 </style>

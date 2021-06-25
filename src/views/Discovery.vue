@@ -272,7 +272,9 @@ export default {
       }
     }
   }
-  .news .songs {
+  .news {
+      margin-bottom: 40px;
+  .songs {
     display: flex;
     flex-wrap: wrap;
     .items {
@@ -288,7 +290,7 @@ export default {
           justify-content: space-around;
         }
       }
-    }
+    }}
   }
   .mvs .mv {
     display: flex;
