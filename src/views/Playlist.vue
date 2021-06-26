@@ -14,5 +14,6 @@ export default {
 .playlist{
     max-width: 1100px;
   margin: 0 auto;
+  overflow: hidden;
 }
 </style>

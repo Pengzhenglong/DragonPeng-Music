@@ -36,14 +36,15 @@
             <div class="img-a">
               <img :src="item.picUrl" alt="" />
             </div>
-            <div class="right-r">
-              <div>{{ item.name }}</div>
-              <div>{{ item.song.artists[0].name }}</div>
-            </div>
+          </div>
+          <div class="right-r">
+            <div class="song-name">{{ item.name }}</div>
+            <div class="singer">{{ item.song.artists[0].name }}</div>
           </div>
         </div>
       </div>
     </div>
+
     <!-- 推荐MV -->
     <div class="mvs">
       <h3 class="title">推荐MV</h3>
@@ -55,12 +56,14 @@
             </div>
           </div>
           <div class="right-r">
-            <div>{{ item.name }}</div>
-            <div>{{ item.artistName }}</div>
+            <div   class="item-name">{{ item.name }}</div>
+            <div  class="item-Name">{{ item.artistName }}</div>
           </div>
         </div>
       </div>
     </div>
+    <!-- 回到顶部 -->
+    <el-backtop></el-backtop>
   </div>
 </template>
 
@@ -71,8 +74,6 @@ export default {
       list: [],
       banner: [],
       news: [],
-      
-     
       mvs: []
     }
   },
@@ -91,17 +92,17 @@ export default {
     if (Playlist.code == 200) {
       this.list = Playlist.result
     }
-// // 3.最新音乐  /personalized/newsong
-    const { data: newsongs} = await this.$axios.get('/personalized/newsong')
+    // // 3.最新音乐  /personalized/newsong
+    const { data: newsongs } = await this.$axios.get('/personalized/newsong')
     // console.log(newsongs)
     if (newsongs.code == 200) {
       this.news = newsongs.result
     }
-//    // 4.最新MV  /personalized/mv
-    const { data: mvs} = await this.$axios.get('/personalized/mv')
+    //    // 4.最新MV  /personalized/mv
+    const { data: mvs } = await this.$axios.get('/personalized/mv')
     console.log(mvs)
     if (mvs.code == 200) {
-      this.mvs= mvs.result
+      this.mvs = mvs.result
     }
 
   }
@@ -149,7 +150,7 @@ export default {
             padding: 5px;
             transform: translateY(-100%);
             transition: all 0.3s;
-                width: 100%;
+            width: 100%;
             // display: none;
             // opacity: 0;
           }
@@ -183,23 +184,37 @@ export default {
       display: flex;
       flex-wrap: wrap;
       height: 500px;
+      margin-left: 15px;
       .items {
-        background-color: #f5fef5;
         color: #4a4a4a;
         display: flex;
+        align-items: center;
         width: 50%;
         height: 100px;
         .right {
           display: flex;
-          .img-a  img{
-           width: 80px;
-           height: 80px;
+          .img-a img {
+            width: 80px;
+            height: 80px;
           }
-          .right-r {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
+        }
+        .right-r {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          padding-left: 10px;
+          height: 80%;
+          .song-name {
+            font-size: 16px;
           }
+          .singer {
+            font-size: 14px;
+            color: #808080;
+          }
+        }
+
+        &:hover {
+          background-color:#f5f5f5;
         }
       }
     }
@@ -207,12 +222,32 @@ export default {
   .mvs .mv {
     display: flex;
     justify-content: space-between;
+    
     .items {
+      margin-right: 20px;
       .right {
         width: 250px;
         height: 140.5px;
         .img-a img {
           width: 100%;
+          border-radius: 5px;
+        }
+      }
+      .right-r{
+        .item-name{
+          width:200px;
+   
+          font-size: 16px;
+    
+          margin-bottom: 10px   ;
+          margin-top:10px;
+        }
+        .item-Name{
+           width:200px;
+          height: 20px;
+          font-size: 14px;
+          color: #c5c5c5; 
+          line-height: 20px;
         }
       }
     }

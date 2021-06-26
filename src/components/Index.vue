@@ -1,87 +1,135 @@
 <template>
   <div class="index">
-    <div  class="left">
-    <div class="nav">
-      <ul>
- 
-          <router-link tag="li" to="/discovery">
-          发现音乐
-          </router-link>
+    <div class="left">
+      <div class="nav">
+        <ul  >
+          <router-link tag="li" to="/discovery"><span>发现音乐</span>  </router-link>
 
+          <router-link tag="li" to="/playlist"><span>推荐歌单</span>  </router-link>
 
-          <router-link tag="li" to="/playlist">
-          推荐歌单
-          </router-link>
+          <router-link tag="li" to="/songs"><span>最新音乐</span></router-link>
 
-
-          <router-link tag="li" to="/songs">
-
-          最新音乐
-          </router-link>
-
-          <router-link tag="li" to="/mvs">
-          最新mv
-          </router-link>
-  
-      </ul>
-    </div></div>
+          <router-link tag="li" to="/mvs"><span>最新mv</span> </router-link>
+        </ul>
+      </div>
+    </div>
     <div class="main">
-   <router-view/>
+      <router-view />
+    </div>
+ <div class="bottom">
+      <aplayer
+        ref="aplayer"
+        :audio="audioInfo"
+        :lrcType="1"
+        :volume.sync="volume"
+        :mini.sync="mini"
+        :loop.sync="loop"
+        :order.sync="order"
+        :listFolded.sync="listFolded"
+        :fixed="fixed"
+        :autoplay="autoplay"
+        @playing="play"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import  discovery  from '../views/Discovery.vue'
-import  playlist  from '../views/Playlist.vue'
-import  songs  from '../views/Songs.vue'
-import  mvs  from '../views/Mvs.vue'
+import discovery from '../views/Discovery.vue'
+import playlist from '../views/Playlist.vue'
+import songs from '../views/Songs.vue'
+import mvs from '../views/Mvs.vue'
 export default {
-    components:{
-      discovery,
-      playlist,
-      songs,
-      mvs
+  data() {
+    return {
+      // 播放列表最大高度
+      // listMaxHeight: '130',
+      // 设置播放器的音量
+      volume: 0.7,
+      // 迷你模式
+      mini: false,
+      // 音频循环播放, 可选值: 'all', 'one', 'none'
+      loop: 'all',
+      // 音频循环顺序, 可选值: 'list', 'random'
+      order: 'random',
+      // 自动播放
+      autoplay: false,
+      // 吸底模式
+      fixed: true,
+      // 是否显示音乐控制面板
+      listFolded: true,
+      state: true,
+      // 是否显示导航栏 nav
+      hideNav: true,
+
     }
+  },
+  components: {
+    discovery,
+    playlist,
+    songs,
+    mvs
+  }
 }
 </script>
-<style>
-.index{
- margin-top:46px;
+<style >
+.index {
+  margin-top: 46px;
   display: flex;
-  height: 830px;
-}
-.index  .left{
-  width: 200px;
-    background-color: aliceblue; 
-}
-.index .nav{ 
-  width: 200px;
+  height: 100%}
+.index .left {
 
-    position: fixed;
+  width: 200px;
+    background-color: #e7e7e7
 
 }
-.index .nav ul{
-  width:200px;
+.index .nav {
+  width: 200px;
+  
+  position: fixed;
+      color: #000;
+   
+    font-size: 18px;
+
+
+}
+.index .nav ul {
+  width: 200px;
   margin: 0;
   padding: 0;
   border: 0;
 }
-.index  .nav  li{
+.index .nav li {
   list-style: none;
- overflow: hidden;
- text-overflow: ellipsis;
- white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+height: 60px;
+line-height: 60px;
+  cursor: pointer;
+  width:200px;
+}
+.nav  ul span{
+margin-left: 30px;
 
-padding: .85714rem  1.28571rem;
-cursor: pointer;
+
+}
+.index .nav  li:hover{
+  background-color: #b8b1b1
 }
 
-.router-link-active{
-  color:red
+.router-link-active {   
+  color: red;
 }
-.main{
-z-index: 1000;
-  flex:1;
+.main {
+  z-index: 1000;
+  flex: 1;
 }
+.bottom {
+
+/* 显示在上 */
+  z-index: 1001;
+
+}
+
 </style>

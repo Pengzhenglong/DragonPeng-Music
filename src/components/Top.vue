@@ -2,8 +2,8 @@
   <div class="all">
     <div  class="fixed">
       <div class="top">
-        <div class="left">
-          <img src="../assets/top.png" alt="" />
+        <div class="peng">
+          <span>Dragon'peng  Music</span>
         </div>
         <div class="center">
           <el-autocomplete
@@ -66,7 +66,7 @@ export default {
 
 </script>
 
-<style  >
+<style >
 .fixed {
  z-index: 10001;
     position: fixed;
@@ -87,5 +87,11 @@ export default {
   border-radius: 50px;
   width: 425px;
   height: 30px;
+}
+.peng{
+      font-size: 1.2rem;
+    font-weight: 600;
+    
+ 
 }
 </style>
