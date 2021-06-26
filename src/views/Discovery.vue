@@ -4,7 +4,7 @@
     <el-carousel :interval="4000" type="card">
       <el-carousel-item v-for="(item, index) in banner" :key="index">
         <a :href="item.url">
-          <img class="banner-img" :src="item.image" alt="" />
+          <img class="banner-img" :src="item.imageUrl" alt="" />
         </a>
       </el-carousel-item>
     </el-carousel>
@@ -15,11 +15,11 @@
         <div class="items" v-for="(item, index) in list" :key="index">
           <div class="item">
             <div class="hot">
-              <span>{{ item.title }}</span>
+              <span>{{ item.copywriter }}</span>
             </div>
-            <img class="imga" :src="item.img" alt="" />
+            <img class="imga" :src="item.picUrl" alt="" />
           </div>
-          <p>{{ item.words }}</p>
+          <p>{{ item.name }}</p>
         </div>
       </div>
     </div>
@@ -29,34 +29,34 @@
       <div class="songs">
         <!--v-for -->
         <div class="items" v-for="(item, index) in news" :key="index">
-          <div class="num">
-            <span>{{ item.id }}</span>
-          </div>
+          <!-- <div class="num">
+            <span>{{ index+1}}</span>
+          </div> -->
           <div class="right">
             <div class="img-a">
-              <img :src="item.image" alt="" />
+              <img :src="item.picUrl" alt="" />
             </div>
             <div class="right-r">
               <div>{{ item.name }}</div>
-              <div>{{ item.songsname }}</div>
+              <div>{{ item.song.artists[0].name }}</div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- mvs -->
+    <!-- 推荐MV -->
     <div class="mvs">
       <h3 class="title">推荐MV</h3>
       <div class="mv">
         <div class="items" v-for="(item, index) in mvs" :key="index">
           <div class="right">
             <div class="img-a">
-              <img :src="item.image" alt="" />
+              <img :src="item.picUrl" alt="" />
             </div>
           </div>
           <div class="right-r">
             <div>{{ item.name }}</div>
-            <div>{{ item.songername }}</div>
+            <div>{{ item.artistName }}</div>
           </div>
         </div>
       </div>
@@ -68,138 +68,42 @@
 export default {
   data() {
     return {
-      list: [
-        {
-          title: '热门推荐',
-          img: "https://p2.music.126.net/IN30SRq1auUunDJpN2qw6Q==/109951166034869996.jpg",
-          words: '有些话我听了会开心，但永远会开心的'
-        },
-        {
-          title: '热门推荐',
-          img: "https://p2.music.126.net/IN30SRq1auUunDJpN2qw6Q==/109951166034869996.jpg",
-          words: '有些话我听了会开心，但永远会开心的'
-        },
-        {
-          title: '热门推荐',
-          img: "https://p2.music.126.net/IN30SRq1auUunDJpN2qw6Q==/109951166034869996.jpg",
-          words: '有些话我听了会开心，但永远会开心的'
-        },
-        {
-          title: '热门推荐',
-          img: "https://p2.music.126.net/IN30SRq1auUunDJpN2qw6Q==/109951166034869996.jpg",
-          words: '有些话我听了会开心，但永远会开心的'
-        },
-        {
-          title: '热门推荐',
-          img: "https://p2.music.126.net/IN30SRq1auUunDJpN2qw6Q==/109951166034869996.jpg",
-          words: '有些话我听了会开心，但永远会开心的'
-        },
-        {
-          title: '热门推荐',
-          img: "https://p2.music.126.net/IN30SRq1auUunDJpN2qw6Q==/109951166034869996.jpg",
-          words: '有些话我听了会开心，但永远会开心的'
-        },
-        {
-          title: '热门推荐',
-          img: "https://p2.music.126.net/IN30SRq1auUunDJpN2qw6Q==/109951166034869996.jpg",
-          words: '有些话我听了会开心，但永远会开心的'
-        },
-        {
-          title: '热门推荐',
-          img: "https://p2.music.126.net/IN30SRq1auUunDJpN2qw6Q==/109951166034869996.jpg",
-          words: '有些话我听了会开心，但永远会开心的'
-        },
-        {
-          title: '热门推荐',
-          img: "https://p2.music.126.net/IN30SRq1auUunDJpN2qw6Q==/109951166034869996.jpg",
-          words: '有些话我听了会开心，但永远会开心的'
-        },
-        {
-          title: '热门推荐',
-          img: "https://p2.music.126.net/IN30SRq1auUunDJpN2qw6Q==/109951166034869996.jpg",
-          words: '有些话我听了会开心，但永远会开心的'
-        },
-
-      ],
-      banner: [
-        {
-          url: 'http:www.baidu.com',
-          image: 'http://p1.music.126.net/cxAKlTtOS3kzcqpL_KvfvQ==/109951166114869532.jpg'
-        },
-        {
-          url: 'http:www.baidu.com',
-          image: 'http://p1.music.126.net/cxAKlTtOS3kzcqpL_KvfvQ==/109951166114869532.jpg'
-        },
-        {
-          url: 'http:www.baidu.com',
-          image: 'http://p1.music.126.net/cxAKlTtOS3kzcqpL_KvfvQ==/109951166114869532.jpg'
-        },
-        {
-          url: 'http:www.baidu.com',
-          image: 'http://p1.music.126.net/cxAKlTtOS3kzcqpL_KvfvQ==/109951166114869532.jpg'
-        },
-      ],
-      news: [
-        {
-          id: '01',
-          image: 'http://p3.music.126.net/RwqmaJNBVr2PAccGWfMEVw==/109951166111591316.jpg?param=120y120',
-          name: '买花的人',
-          songsname: '魏如轩/鲜于钲二'
-        },
-        {
-          id: '01',
-          image: 'http://p3.music.126.net/RwqmaJNBVr2PAccGWfMEVw==/109951166111591316.jpg?param=120y120',
-          name: '买花的人',
-          songsname: '魏如轩/鲜于钲二'
-        },
-        {
-          id: '01',
-          image: 'http://p3.music.126.net/RwqmaJNBVr2PAccGWfMEVw==/109951166111591316.jpg?param=120y120',
-          name: '买花的人',
-          songsname: '魏如轩/鲜于钲二'
-        },
-        {
-          id: '01',
-          image: 'http://p3.music.126.net/RwqmaJNBVr2PAccGWfMEVw==/109951166111591316.jpg?param=120y120',
-          name: '买花的人',
-          songsname: '魏如轩/鲜于钲二'
-        },
-        {
-          id: '01',
-          image: 'http://p3.music.126.net/RwqmaJNBVr2PAccGWfMEVw==/109951166111591316.jpg?param=120y120',
-          name: '买花的人',
-          songsname: '魏如轩/鲜于钲二'
-        },
-        {
-          id: '01',
-          image: 'http://p3.music.126.net/RwqmaJNBVr2PAccGWfMEVw==/109951166111591316.jpg?param=120y120',
-          name: '买花的人',
-          songsname: '魏如轩/鲜于钲二'
-        },
-      ],
-      mvs: [
-        {
-          image: 'https://p2.music.126.net/e5FlRtdhRCA0PLat7dgDlQ==/109951166117884028.jpg',
-          name: 'Need Some of That (Live)',
-          songername: 'Weezer'
-        },
-        {
-          image: 'https://p2.music.126.net/e5FlRtdhRCA0PLat7dgDlQ==/109951166117884028.jpg',
-          name: 'Need Some of That (Live)',
-          songername: 'Weezer'
-        },
-        {
-          image: 'https://p2.music.126.net/e5FlRtdhRCA0PLat7dgDlQ==/109951166117884028.jpg',
-          name: 'Need Some of That (Live)',
-          songername: 'Weezer'
-        },
-        {
-          image: 'https://p2.music.126.net/e5FlRtdhRCA0PLat7dgDlQ==/109951166117884028.jpg',
-          name: 'Need Some of That (Live)',
-          songername: 'Weezer'
-        },
-      ]
+      list: [],
+      banner: [],
+      news: [],
+      
+     
+      mvs: []
     }
+  },
+  async created() {
+    const { data: data } = await this.$axios.get('/banner')
+    // console.log(data)
+    if (data.code == 200) {
+      this.banner = data.banners
+    }
+    //  推荐歌单   /personalized
+    const { data: Playlist } = await this.$axios.get('/personalized', {
+      params: {
+        limit: 10
+      }
+    })
+    if (Playlist.code == 200) {
+      this.list = Playlist.result
+    }
+// // 3.最新音乐  /personalized/newsong
+    const { data: newsongs} = await this.$axios.get('/personalized/newsong')
+    // console.log(newsongs)
+    if (newsongs.code == 200) {
+      this.news = newsongs.result
+    }
+//    // 4.最新MV  /personalized/mv
+    const { data: mvs} = await this.$axios.get('/personalized/mv')
+    console.log(mvs)
+    if (mvs.code == 200) {
+      this.mvs= mvs.result
+    }
+
   }
 }
 </script>
@@ -245,6 +149,7 @@ export default {
             padding: 5px;
             transform: translateY(-100%);
             transition: all 0.3s;
+                width: 100%;
             // display: none;
             // opacity: 0;
           }
@@ -273,35 +178,41 @@ export default {
     }
   }
   .news {
-      margin-bottom: 40px;
-  .songs {
-    display: flex;
-    flex-wrap: wrap;
-    .items {
-      background-color: #f5fef5;
-      color: #4a4a4a;
+    margin-bottom: 40px;
+    .songs {
       display: flex;
-      width: 50%;
-      .right {
+      flex-wrap: wrap;
+      height: 500px;
+      .items {
+        background-color: #f5fef5;
+        color: #4a4a4a;
         display: flex;
-        .right-r {
+        width: 50%;
+        height: 100px;
+        .right {
           display: flex;
-          flex-direction: column;
-          justify-content: space-around;
+          .img-a  img{
+           width: 80px;
+           height: 80px;
+          }
+          .right-r {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+          }
         }
       }
-    }}
+    }
   }
   .mvs .mv {
     display: flex;
     justify-content: space-between;
     .items {
-
-      .right  {
-        width:250px;
+      .right {
+        width: 250px;
         height: 140.5px;
-        .img-a  img{
-          width:100%
+        .img-a img {
+          width: 100%;
         }
       }
     }
