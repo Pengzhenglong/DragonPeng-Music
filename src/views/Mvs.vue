@@ -1,6 +1,6 @@
 <template>
   <div class="mvs" >
-<img src="../assets/mvs.png" alt="">
+
 
   </div>
 </template>
