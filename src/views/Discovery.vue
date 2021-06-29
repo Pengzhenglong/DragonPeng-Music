@@ -29,6 +29,7 @@
       <div class="songs">
         <!--v-for -->
         <div class="items" v-for="(item, index) in news" :key="index">
+          <div @click="playMusic(item.id)" class="iconfont icon-play"></div>
           <!-- <div class="num">
             <span>{{ index+1}}</span>
           </div> -->
@@ -56,8 +57,8 @@
             </div>
           </div>
           <div class="right-r">
-            <div   class="item-name">{{ item.name }}</div>
-            <div  class="item-Name">{{ item.artistName }}</div>
+            <div class="item-name">{{ item.name }}</div>
+            <div class="item-Name">{{ item.artistName }}</div>
           </div>
         </div>
       </div>
@@ -191,6 +192,37 @@ export default {
         align-items: center;
         width: 50%;
         height: 100px;
+        position: relative;
+        .icon-play {
+          width: 25px;
+          height: 25px;
+          position: absolute;
+          top: 50%;
+          left: 7%;
+          color: #dd6d60;
+          font-size: 12px;
+          border-radius: 50%;
+          transform: translate(-50%, -50%);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(255, 255, 255, 0.8);
+          opacity: 0;
+          &::before {
+            transform: translateX(3px);
+            content: "";
+            width: 0;
+            height: 0;
+            border-width: 9px 0 9px 9px;
+            border-style: solid;
+            border-color: transparent #dd6d60 transparent;
+            margin-right: 3px;
+          }
+        }
+        &:hover .icon-play {
+          opacity: 1;
+        }
+
         .right {
           display: flex;
           .img-a img {
@@ -214,7 +246,7 @@ export default {
         }
 
         &:hover {
-          background-color:#f5f5f5;
+          background-color: #f5f5f5;
         }
       }
     }
@@ -222,7 +254,7 @@ export default {
   .mvs .mv {
     display: flex;
     justify-content: space-between;
-    
+
     .items {
       margin-right: 20px;
       .right {
@@ -233,20 +265,20 @@ export default {
           border-radius: 5px;
         }
       }
-      .right-r{
-        .item-name{
-          width:200px;
-   
+      .right-r {
+        .item-name {
+          width: 200px;
+
           font-size: 16px;
-    
-          margin-bottom: 10px   ;
-          margin-top:10px;
+
+          margin-bottom: 10px;
+          margin-top: 10px;
         }
-        .item-Name{
-           width:200px;
+        .item-Name {
+          width: 200px;
           height: 20px;
           font-size: 14px;
-          color: #c5c5c5; 
+          color: #c5c5c5;
           line-height: 20px;
         }
       }

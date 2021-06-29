@@ -29,7 +29,23 @@
       <div class="background-img"></div>
     </div>
     <!-- flex -->
+
     <div class="recommend">
+      <!-- 栏 -->
+      <div class="tab">
+        <span>全部 </span>
+        <span>全部</span>
+        <span>全部</span>
+        <span>全部</span>
+        <span>全部</span>
+        <span>全部</span>
+        <span>全部</span>
+        <span>全部</span>
+        <span>全部</span>
+        <span>全部</span>
+        <span>全部</span>
+        <span>全部</span>
+      </div>
       <div class="box">
         <div class="items" v-for="(item, index) in palylist" :key="index">
           <div class="item">
@@ -79,7 +95,7 @@ export default {
   margin: 0 auto;
   overflow: hidden;
   .recommend {
-    margin-top:30px;
+    margin-top: 30px;
     margin-bottom: 30px;
     .box {
       display: flex;
@@ -194,5 +210,15 @@ img {
   /* white-space:nowrap; */
   text-overflow: ellipsis;
   height: 80px;
+}
+.tab{
+  display: flex;
+  justify-content: flex-end ;
+  margin:10px auto;
+
+}
+.tab  span{
+  margin-right:20px;
+  font-size: 15px;
 }
 </style>
