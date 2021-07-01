@@ -2,10 +2,14 @@
   <div class="index">
     <div class="left">
       <div class="nav">
-        <ul  >
-          <router-link tag="li" to="/discovery"><span>发现音乐</span>  </router-link>
+        <ul>
+          <router-link tag="li" to="/discovery"
+            ><span>发现音乐</span>
+          </router-link>
 
-          <router-link tag="li" to="/playlist"><span>推荐歌单</span>  </router-link>
+          <router-link tag="li" to="/playlist"
+            ><span>推荐歌单</span>
+          </router-link>
 
           <router-link tag="li" to="/songs"><span>最新音乐</span></router-link>
 
@@ -16,7 +20,7 @@
     <div class="main">
       <router-view />
     </div>
- <div class="bottom">
+    <div class="bottom">
       <aplayer
         ref="aplayer"
         :audio="audioInfo"
@@ -76,22 +80,22 @@ export default {
 .index {
   margin-top: 46px;
   display: flex;
-  height: 100%}
+  height: 100%;
+}
 .index .left {
-
   width: 200px;
-    background-color: #e7e7e7
 
+  height: 100%;
 }
 .index .nav {
   width: 200px;
-  
+
   position: fixed;
-      color: #000;
-   
-    font-size: 18px;
-
-
+  color: #000;
+left: 0;
+  font-size: 18px;
+  height: 100%;
+   background-color: #e7e7e7;
 }
 .index .nav ul {
   width: 200px;
@@ -104,21 +108,19 @@ export default {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-height: 60px;
-line-height: 60px;
+  height: 60px;
+  line-height: 60px;
   cursor: pointer;
-  width:200px;
+  width: 200px;
 }
-.nav  ul span{
-margin-left: 30px;
-
-
+.nav ul span {
+  margin-left: 30px;
 }
-.index .nav  li:hover{
-  background-color: #b8b1b1
+.index .nav li:hover {
+  background-color: #b8b1b1;
 }
 
-.router-link-active {   
+.router-link-active {
   color: red;
 }
 .main {
@@ -126,10 +128,7 @@ margin-left: 30px;
   flex: 1;
 }
 .bottom {
-
-/* 显示在上 */
+  /* 显示在上 */
   z-index: 1001;
-
 }
-
 </style>

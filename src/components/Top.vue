@@ -67,7 +67,8 @@ export default {
 </script>
 
 <style >
-.fixed {
+
+.all  .fixed {
  z-index: 10001;
     position: fixed;
   width: 100%;

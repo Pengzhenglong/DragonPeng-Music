@@ -3,48 +3,96 @@
     <!-- header -->
     <div class="header">
       <div class="image">
-        <img
-          src="http://p4.music.126.net/PZqH8c2ZZNwbR8S6ZcwaJw==/109951164807510929.jpg?param=280y280"
-          alt=""
-        />
+        <img :src="topLists.coverImgUrl" alt="" />
       </div>
       <div class="header-right">
         <div class="best">精品歌单</div>
-        <div class="center">岁月唱片机，好莱坞老电影经典原生</div>
+        <div class="center">{{ topLists.name }}</div>
         <div class="derection">
-          封面：简介：封面：罗马假日 奥黛丽·赫本 Audrey Hepburn & 格利高里·派克
-          Gregory Peck 经典永恒，岁月留声
-          歌单收集的是1970年代以前美国部分经典电影的原声，大部分是好莱坞黄金时代的电影，类型有歌舞片、喜剧片、西部片和部分黑色电影。
-          ☆部分参考美国电影学会（AFI）百年百大系列 1.百大电影歌曲 2.百大经典电影
-          3.百大电影配乐 排序无先后 1.罗马假日(非原声，契合主题MV歌曲)
-          2.蒂凡尼的早餐 3.雨中曲 4-5.毕业生 6.卡萨布兰卡 7.纽伦堡的审P
-          8.控方证人 9.龙凤配 10.甜姐儿 11-12.绅士爱美人 13.大江东去 14.吉尔达
-          15.乱世佳人 16.魂断蓝桥 17.亮眼睛 18.生 3.百大电影配乐 排序无先后
-          1.罗马假日(非原声，契合主题MV歌曲) 2.蒂凡尼的早餐 3.雨中曲 4-5.毕业生
-          6.卡萨布兰卡 7.纽伦堡的审P 8.控方证人 9.龙凤配 10.甜姐儿
-          11-12.绅士爱美人 13.大江东去 14.吉尔达 15.乱世佳人 16.魂断蓝桥
-          17.亮眼睛 18.生
+          {{ topLists.description }}
         </div>
       </div>
-      <div class="background-img"></div>
+      <!-- 背景 -->
+      <img :src="topLists.coverImgUrl" alt="" class="bg" />
+      <div class="bg-mask"></div>
     </div>
     <!-- flex -->
 
     <div class="recommend">
       <!-- 栏 -->
       <div class="tab">
-        <span>全部 </span>
-        <span>全部</span>
-        <span>全部</span>
-        <span>全部</span>
-        <span>全部</span>
-        <span>全部</span>
-        <span>全部</span>
-        <span>全部</span>
-        <span>全部</span>
-        <span>全部</span>
-        <span>全部</span>
-        <span>全部</span>
+        <span
+          class="item"
+          :class="{ active: selected == '全部' }"
+          @click="selected = '全部'"
+          >全部
+        </span>
+        <span
+          class="item"
+          :class="{ active: selected == '欧美' }"
+          @click="selected = '欧美'"
+          >欧美</span
+        >
+        <span
+          class="item"
+          :class="{ active: selected == '华语' }"
+          @click="selected = '华语'"
+          >华语</span
+        >
+        <span
+          class="item"
+          :class="{ active: selected == '流行' }"
+          @click="selected = '流行'"
+          >流行</span
+        >
+        <span
+          class="item"
+          :class="{ active: selected == '说唱' }"
+          @click="selected = '说唱'"
+          >说唱</span
+        >
+        <span
+          class="item"
+          :class="{ active: selected == '摇滚' }"
+          @click="selected = '摇滚'"
+          >摇滚</span
+        >
+        <span
+          class="item"
+          :class="{ active: selected == '民谣' }"
+          @click="selected = '民谣'"
+          >民谣</span
+        >
+        <span
+          class="item"
+          :class="{ active: selected == '电子' }"
+          @click="selected = '电子'"
+          >电子</span
+        >
+        <span
+          class="item"
+          :class="{ active: selected == '轻音乐' }"
+          @click="selected = '轻音乐'"
+          >轻音乐</span
+        >
+        <span
+          class="item"
+          :class="{ active: selected == '影视原生' }"
+          @click="selected = '影视原生'"
+          >影视原生</span
+        >
+        <span
+          class="item"
+          :class="{ active: selected == 'ACG' }"
+          @click="selected = 'ACG'"
+          >ACG</span
+        >
+        <span
+          class="item"
+          :class="{ active: selected == '怀旧' }"
+          @click="selected = '怀旧'"
+          >怀旧</span
+        >
       </div>
       <div class="box">
         <div class="items" v-for="(item, index) in palylist" :key="index">
@@ -59,6 +107,21 @@
         </div>
       </div>
     </div>
+     <!-- 分页器
+      total 总条数
+      current-page 当前页
+      page-size 每页多少条数据
+      current-change 页码改变事件
+     -->
+<el-pagination
+  :page-size="50"
+  :pager-count="8"
+  layout="prev, pager, next"
+  :current-page="page"
+  :total="total"
+  @current-change="handleCurrentchange">
+</el-pagination>
+
   </div>
 </template>
 
@@ -66,25 +129,74 @@
 export default {
   data() {
     return {
-
+      // 总条数
+      total:0,
+      // 当前页数
+      page:1,
+      // 歌单列表
       palylist: [],
+      // 顶部推荐歌单列表
+      topLists: {},
+      selected:'全部'
     }
   },
   methods: {
+    handleCurrentchange(val){
+      // 字符串模板 变量名可以写在${}中
+        // console.log(`当前页：${val}`)
+        this.page=val
+        this.getList()
+        
+    },
+    async getTopList(limit, cat) {
+      // 获取  顶部  歌单
+      const { data: topList } = await this.$axios.get('/top/playlist/highquality', {
+        params: {
+          limit,
+          // 分类数据
+          cat: cat
+        }
+      })
 
+      if (topList.code == 200) {
+        this.topLists = topList.playlists[0]
+        console.log(topList)
+      }
+    },
+    async getList(limit,cat,offset=1) {
+      const { data: play } = await this.$axios.get('/top/playlist', {
+        params: {
+          limit,
+          cat,
+          // 起始的值，( 页数 -1)*30, 其中 30 为 limit 的值 , 默认为 0
+          offset:(this.page-1)*50
+        }
+      })
+
+      if (play.code == 200) {
+        this.palylist = play.playlists
+        this.total=play.total
+      }
+    }
+  },
+  watch: {
+    // 监听selected的  变化
+    selected() {
+      
+      // 获取新的顶部精品歌单
+      this.getTopList(1,this.selected),
+      this.getList(50,this.selected)
+      // this.page=1
+    }
   },
   //获取歌单列表    /top/playlist/
   async created() {
-    const { data: data } = await this.$axios.get('/top/playlist', {
-      params: {
-        limit: 50
-      }
-    })
 
-    if (data.code == 200) {
-      this.palylist = data.playlists
-    }
-    console.log(this.palylist)
+    // 获取歌单列表
+    this.getList(50,'全部')
+    // 获取顶部歌单信息
+    this.getTopList(1, '全部')
+
   }
 }
 </script>
@@ -163,30 +275,46 @@ export default {
   margin: 0 auto;
 
   display: flex;
-  background-color: #b69292;
+  // background-color: #b69292;
   padding: 20px;
 }
+.playlist .header .bg {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  filter: blur(20px);
+}
+
+.playlist .header .bg-mask {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 .image {
   width: 160px;
   height: 160px;
   margin-right: 20px;
+  z-index: 1000;
 }
 img {
   height: 100%;
 }
 .header-right {
   position: relative;
-  width: 720px;
+  width: 880px;
   height: 160px;
+  z-index: 1000;
 }
-.background-img {
-  background-image: url(http://p4.music.126.net/PZqH8c2ZZNwbR8S6ZcwaJw==/109951164807510929.jpg?param=280y280);
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  width: 100%;
-}
+
 .best {
   width: 100px;
   height: 30px;
@@ -211,14 +339,22 @@ img {
   text-overflow: ellipsis;
   height: 80px;
 }
-.tab{
+.tab {
   display: flex;
-  justify-content: flex-end ;
-  margin:10px auto;
-
+  justify-content: flex-end;
+  margin: 10px auto;
 }
-.tab  span{
-  margin-right:20px;
+.tab span {
+  margin-right: 20px;
   font-size: 15px;
+  color: gray;
+  cursor: pointer;
+}
+.playlist .recommend .tab .item.active {
+  color: #dd6d60;
+}
+.el-pagination{
+  margin:30px  10px;
+  text-align: right;
 }
 </style>
