@@ -21,7 +21,8 @@
       <router-view />
     </div>
     <div class="bottom">
-      <aplayer
+      <audio :src="musicUrl"  controls autoplay ></audio>
+      <!-- <aplayer
         ref="aplayer"
         :audio="audioInfo"
         :lrcType="1"
@@ -33,7 +34,7 @@
         :fixed="fixed"
         :autoplay="autoplay"
         @playing="play"
-      />
+      /> -->
     </div>
   </div>
 </template>
@@ -46,6 +47,7 @@ import mvs from '../views/Mvs.vue'
 export default {
   data() {
     return {
+      musicUrl:'http://m801.music.126.net/20210702174302/fbe2aafe5c00f402df761abbc88ca65b/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/9524435525/2897/d82f/77aa/f9a4a521bf1985b6156e780b0024beb3.mp3',
       // 播放列表最大高度
       // listMaxHeight: '130',
       // 设置播放器的音量
@@ -126,9 +128,27 @@ left: 0;
 .main {
   z-index: 1000;
   flex: 1;
+ 
+  /* overflow-y: scroll; */
+}
+.index .main > div {
+  max-width: 1100px;
+  margin: 0 auto;
 }
 .bottom {
   /* 显示在上 */
   z-index: 1001;
+  height: 60px;
+  width:100%;
+   background: #f1f3f4;
+   position: fixed;
+   bottom: 0;
+   left: 0;
+
+}
+audio{
+  width:100%;
+  border-radius: 0;
+  outline: 0;
 }
 </style>

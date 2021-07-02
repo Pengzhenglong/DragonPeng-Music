@@ -28,8 +28,8 @@
       <h3 class="title">最新音乐</h3>
       <div class="songs">
         <!--v-for -->
-        <div class="items" v-for="(item, index) in news" :key="index">
-          <div @click="playMusic(item.id)" class="iconfont icon-play"></div>
+        <div class="items" @click="playMusic(item.id)" v-for="(item, index) in news" :key="index">
+          <div  class="iconfont icon-play"></div>
           <!-- <div class="num">
             <span>{{ index+1}}</span>
           </div> -->
@@ -69,6 +69,8 @@
 </template>
 
 <script>
+// 导入辅助函数
+// import  {mapActions}  from  'vuex'
 export default {
   data() {
     return {
@@ -77,6 +79,21 @@ export default {
       news: [],
       mvs: []
     }
+  },
+  methods:{
+    // 点击按钮，播放音乐
+      async   playMusic(id){
+      //  console.log(id)
+      const  {data:  music}  =await  this.$axios.get('/song/url',{
+        params:{
+              id
+        }
+      })
+      // console.log(music)
+      let  url=music.data[0].url
+      console.log(url)
+      this.$parent.musicUrl=url
+      }
   },
   async created() {
     const { data: data } = await this.$axios.get('/banner')
@@ -101,7 +118,7 @@ export default {
     }
     //    // 4.最新MV  /personalized/mv
     const { data: mvs } = await this.$axios.get('/personalized/mv')
-    console.log(mvs)
+    // console.log(mvs)
     if (mvs.code == 200) {
       this.mvs = mvs.result
     }
@@ -254,7 +271,7 @@ export default {
   .mvs .mv {
     display: flex;
     justify-content: space-between;
-
+margin-bottom: 70px;
     .items {
       margin-right: 20px;
       .right {
@@ -290,5 +307,8 @@ export default {
   font-size: 18.72px;
   margin: 0 0 20px;
   padding: 0 0 0 0px;
+}
+.el-backtop{
+  margin-bottom: 30px;
 }
 </style>
