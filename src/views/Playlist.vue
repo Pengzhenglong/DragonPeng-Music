@@ -114,6 +114,7 @@
       current-change 页码改变事件
      -->
 <el-pagination
+background
   :page-size="50"
   :pager-count="8"
   layout="prev, pager, next"
@@ -186,7 +187,8 @@ export default {
       // 获取新的顶部精品歌单
       this.getTopList(1,this.selected),
       this.getList(50,this.selected)
-      // this.page=1
+      // 修改页嘛
+      this.page=1
     }
   },
   //获取歌单列表    /top/playlist/
@@ -353,8 +355,9 @@ img {
 .playlist .recommend .tab .item.active {
   color: #dd6d60;
 }
-.el-pagination{
+ .el-pagination{
   margin:30px  10px;
   text-align: right;
+      margin-bottom: 75px;
 }
 </style>

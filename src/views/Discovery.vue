@@ -29,13 +29,14 @@
       <div class="songs">
         <!--v-for -->
         <div class="items" @click="playMusic(item.id)" v-for="(item, index) in news" :key="index">
-          <div  class="iconfont icon-play"></div>
+         
           <!-- <div class="num">
             <span>{{ index+1}}</span>
           </div> -->
           <div class="right">
             <div class="img-a">
-              <img :src="item.picUrl" alt="" />
+              <img :src="item.picUrl" alt="" /> 
+              <div  class="iconfont icon-play"></div>
             </div>
           </div>
           <div class="right-r">
@@ -210,12 +211,18 @@ export default {
         width: 50%;
         height: 100px;
         position: relative;
+
+
+        .right {
+          display: flex;
+          .img-a{
+            position: relative;
         .icon-play {
           width: 25px;
           height: 25px;
           position: absolute;
           top: 50%;
-          left: 7%;
+          left: 50%;
           color: #dd6d60;
           font-size: 12px;
           border-radius: 50%;
@@ -239,13 +246,12 @@ export default {
         &:hover .icon-play {
           opacity: 1;
         }
-
-        .right {
-          display: flex;
-          .img-a img {
+               img {
             width: 80px;
             height: 80px;
           }
+          }
+        
         }
         .right-r {
           display: flex;
