@@ -1,11 +1,21 @@
 <template>
   <div class="song">
     <div class="tar">
-      <span>全部</span>
-      <span>华语</span>
-      <span>欧美</span>
-      <span>日本</span>
-      <span>韩国</span>
+      <span class="item" @click="tag = 0" :class="{ active: tag == 0 }"
+        >全部</span
+      >
+      <span class="item" @click="tag = 7" :class="{ active: tag == 7 }"
+        >华语</span
+      >
+      <span class="item" @click="tag = 96" :class="{ active: tag == 96 }"
+        >欧美</span
+      >
+      <span class="item" @click="tag = 8" :class="{ active: tag == 8 }"
+        >日本</span
+      >
+      <span class="item" @click="tag = 16" :class="{ active: tag == 16 }"
+        >韩国</span
+      >
     </div>
     <div class="center">
       <th></th>
@@ -31,14 +41,14 @@
           <div class="right">
             <div class="img-a">
               <img :src="item.album.blurPicUrl" alt="" />
-              <div class="iconfont icon-play"></div>
+              <div class="iconfont icon-play" @click="playMusic(item.id)"></div>
             </div>
           </div>
           <div class="right-r">
             <span class="song-name">{{ item.name }}</span>
             <span class="singer">{{ item.album.artists[0].name }}</span>
             <span class="album-name">{{ item.album.name }}</span>
-            <span class="timer">04:22</span>
+            <span class="timer">{{ item.duration }}</span>
           </div>
         </div>
         <!-- 分页器
@@ -47,14 +57,12 @@
       page-size 每页多少条数据
       current-change 页码改变事件
      -->
+        <div class="footer">
+          <el-pagination background layout="prev, pager, next" :total="1000">
+          </el-pagination>
+        </div>
       </div>
     </div>
-<!-- <div  class="footer">
-<el-pagination
-  background
-  layout="prev, pager, next"
-  :total="1000">
-</el-pagination> </div> -->
   </div>
 </template>
 
@@ -67,29 +75,79 @@ export default {
       tag: '0'
     }
   },
-  async created() {
-    const { data: songs } = await this.$axios.get('/top/song', {
-      params: {
-        type: this.tag,
+  watch:{
+tag(){
+  this.getSongs()
+}
+  },
+  methods: {
+    async getSongs() {
+      const { data: songs } = await this.$axios.get('/top/song', {
+        params: {
+          type: this.tag,
         limit: 20,
-      }
-    })
+          offset: 1,
+        }
+      })
 
-    if (songs.code == 200) {
-      this.song = songs.data
+      if (songs.code == 200) {
+        this.song = songs.data
+      }
+      for (let i = 0; i < this.song.length; i++) {
+        // 获取  总毫秒数
+        let duration = this.song[i].duration;
+        // 假定 	350750 毫秒
+        // 秒 350750/1000  350秒
+        // 分 350 /60
+        // 秒 350 % 60
+
+        let min = parseInt(duration / 1000 / 60)
+        if (min < 10) {
+          min = '0' + min
+        }
+        let sec = parseInt((duration / 1000) % 60)
+        if (sec < 10) {
+          sec = '0' + sec
+        }
+        this.song[i].duration = `${min}:${sec}`
+      }
+      // console.log(this.song)
+    },
+    // 点击按钮，播放音乐
+    async playMusic(id) {
+      //  console.log(id)
+      const { data: music } = await this.$axios.get('/song/url', {
+        params: {
+          id
+        }
+      })
+      // console.log(music)
+      let url = music.data[0].url
+      console.log(url)
+      this.$parent.musicUrl = url
     }
-    console.log(this.song)
+  },
+  async created() {
+    this.getSongs()
   }
 }
 </script>
 
 <style  lang='scss'  >
-
+.song  .tar .item.active {
+  color: #dd6d60;
+}
+.song .news .footer .el-pagination {
+  margin: 30px 10px;
+  text-align: right;
+  margin-bottom: 75px;
+}
 .song {
   max-width: 1100px;
   margin: 0 auto;
-    // overflow: hidden;
+  // overflow: hidden;
 }
+
 .song .tar {
   display: flex;
   justify-content: flex-end;
@@ -223,7 +281,6 @@ export default {
           width: 235px;
           margin-left: 20px;
         }
-
       }
 
       &:hover {
