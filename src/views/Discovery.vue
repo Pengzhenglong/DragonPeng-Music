@@ -257,14 +257,17 @@ export default {
           display: flex;
           flex-direction: column;
           justify-content: space-around;
-          padding-left: 10px;
+         padding-right: 250px;
+         padding-left: 0;
           height: 80%;
           .song-name {
             font-size: 16px;
+            margin-left: 10px;
           }
           .singer {
             font-size: 14px;
             color: #808080;
+            margin-left: 10px;
           }
         }
 
