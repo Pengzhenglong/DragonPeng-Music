@@ -228,7 +228,7 @@ export default {
 
 
 
-    // 点击按钮，播放音乐
+    // 点击按钮，播放音乐 
     async playMusic(id) {
       //  console.log(id)
       const { data: music } = await this.$axios.get('/song/url', {

@@ -11,7 +11,7 @@
             autocomplete="off"
             placeholder="请输入歌曲"
             prefix-icon="el-icon-search"
-             @keyup.enter.native="toResult"
+            @keyup.enter.native="toResult"
           ></el-input>
         </div>
       </div>
@@ -33,15 +33,15 @@ export default {
   },
   methods: {
     toResult() {
-        // 非空判断
-        if (this.inputValue == '') {
-          // 提示用户
-          this.$message.warning('请输入内容')
-        }else{
-          // 去搜索页 携带数据
-          this.$router.push('/result?q='+this.inputValue)
-        }
+      // 非空判断
+      if (this.inputValue == '') {
+        // 提示用户
+        this.$message.warning('请输入内容')
+      } else {
+        // 去搜索页 携带数据
+        this.$router.push('/result?q=' + this.inputValue)
       }
+    }
   }
 }
 
@@ -55,12 +55,16 @@ export default {
   top: 0;
   left: 0;
   background-color: #fff;
+    z-index:10000;
 }
 .top {
   display: flex;
   align-items: center;
   height: 46px;
-}
+  background-color: #f9f9f9;
+  z-index:10000;
+  
+}  
 .center {
   margin: 0 auto;
 }

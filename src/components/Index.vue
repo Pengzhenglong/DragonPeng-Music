@@ -7,13 +7,14 @@
             ><span>发现音乐</span>
           </router-link>
 
-          <router-link tag="li" to="/playlist"
+          <router-link tag="li" to="/playlists"
             ><span>推荐歌单</span>
           </router-link>
 
           <router-link tag="li" to="/songs"><span>最新音乐</span></router-link>
 
           <router-link tag="li" to="/mvs"><span>最新mv</span> </router-link>
+            <router-link tag="li" to="/playlist"><span>专辑列表</span> </router-link>
         </ul>
       </div>
     </div>
@@ -21,7 +22,7 @@
       <router-view />
     </div>
     <div class="bottom">
-      <audio :src="musicUrl"  controls autoplay ></audio>
+      <audio :src="musicUrl"  controls  ></audio>
       <!-- <aplayer
         ref="aplayer"
         :audio="audioInfo"
@@ -41,9 +42,10 @@
 
 <script>
 import discovery from '../views/Discovery.vue'
-import playlist from '../views/Playlist.vue'
+import playlists from '../views/Playlists.vue'
 import songs from '../views/Songs.vue'
 import mvs from '../views/Mvs.vue'
+import playlist from '../views/Playlist.vue'
 export default {
   data() {
     return {
@@ -72,9 +74,10 @@ export default {
   },
   components: {
     discovery,
-    playlist,
+    playlists,
     songs,
-    mvs
+    mvs,
+    playlist
   }
 }
 </script>
