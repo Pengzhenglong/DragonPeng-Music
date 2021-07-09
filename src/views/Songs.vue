@@ -191,35 +191,7 @@ tag(){
       .number {
         margin: 0 15px;
       }
-      // .icon-play {
-      //   width: 25px;
-      //   height: 25px;
-      //   position: absolute;
-      //   top: 50%;
-      //      left: 4%;
-      //   color: #dd6d60;
-      //   font-size: 12px;
-      //   border-radius: 50%;
-      //   transform: translate(-50%, -50%);
-      //   display: flex;
-      //   align-items: center;
-      //   justify-content: center;
-      //   background: rgba(255, 255, 255, 0.8);
-      //   opacity: 1;
-      //   &::before {
-      //     transform: translateX(3px);
-      //     content: "";
-      //     width: 0;
-      //     height: 0;
-      //     border-width: 9px 0 9px 9px;
-      //     border-style: solid;
-      //     border-color: transparent #dd6d60 transparent;
-      //     margin-right: 3px;
-      //   }
-      // }
-      // &:hover .icon-play {
-      //   opacity: 1;
-      // }
+
 
       .right {
         display: flex;

@@ -39,7 +39,7 @@
         <div class="recommend">
           <!-- <h3 class="title">推荐歌单</h3> -->
           <div class="box">
-            <div class="items" v-for="(item, index) in list" :key="index">
+            <div class="items" v-for="(item, index) in list" :key="index"  @click="toPlaylist(item.id)">
               <div class="item">
                 <div class="hot">
                   播放量：
@@ -121,7 +121,7 @@ export default {
           limit // limit: limit
         }
       }).then(res => {
-        console.log(res)
+        // console.log(res)
         // 获取歌曲
         if (type == 1) {
           // 歌曲
@@ -220,7 +220,11 @@ export default {
       }
     },
 
-
+// 去歌单详情页
+toPlaylist(id){
+    // 点击跳转并携带数据即可
+    this.$router.push(`/playlist?q=${id}`)
+},
 
 
 
@@ -238,7 +242,7 @@ export default {
       })
       // console.log(music)
       let url = music.data[0].url
-      console.log(url)
+      // console.log(url)
       this.$parent.musicUrl = url
     }
   }

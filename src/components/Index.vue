@@ -37,6 +37,8 @@
         @playing="play"
       /> -->
     </div>
+        <!-- 回到顶部 -->
+    <el-backtop></el-backtop>
   </div>
 </template>
 
@@ -82,6 +84,9 @@ export default {
 }
 </script>
 <style >
+.el-backtop{
+  margin-bottom: 30px;
+}
 .index {
   margin-top: 46px;
   display: flex;

@@ -65,7 +65,7 @@
       </div>
     </div>
     <!-- 回到顶部 -->
-    <el-backtop></el-backtop>
+    <!-- <el-backtop></el-backtop> -->
   </div>
 </template>
 
@@ -129,7 +129,7 @@ export default {
 </script>
 
 
-<style lang='scss' >
+<style lang='scss'   >
 .discovery-container {
   max-width: 1100px;
   margin: 0 auto;
@@ -317,7 +317,7 @@ margin-bottom: 70px;
   margin: 0 0 20px;
   padding: 0 0 0 0px;
 }
-.el-backtop{
-  margin-bottom: 30px;
-}
+// .el-backtop{
+//   margin-bottom: 30px;
+// }
 </style>
