@@ -40,7 +40,7 @@
     </div>
     <div>
       <el-tabs v-model="activeIndex" value="songs" id="list">
-        <el-tab-pane label="歌曲列表" name="songs"  >
+        <el-tab-pane label="歌曲列表" name="songs">
           <div class="song">
             <div class="center">
               <th></th>
@@ -88,19 +88,47 @@
       current-page 当前页
       page-size 每页多少条数据
       current-change 页码改变事件
-     --><div class="footer">
-          <el-pagination background layout="prev, pager, next" :total="1000">
-          </el-pagination>
-        </div>
-
-
+     -->
+                <div class="footer">
+                  <el-pagination
+                    background
+                    layout="prev, pager, next"
+                    :total="1000"
+                  >
+                  </el-pagination>
+                </div>
               </div>
             </div>
           </div>
-
-
         </el-tab-pane>
-        <el-tab-pane label="评论" name="lists" > </el-tab-pane>
+        <el-tab-pane label="评论" name="lists">
+          <div class="description-all">
+            <h4>精彩评论</h4>
+            <div class="users">
+              <div class="image-a">
+                <img
+                  class="image-b"
+                  src="https://p4.music.126.net/1_mACXIu1NrdVjv-8gVKDA==/109951164935604526.jpg?param=80y80"
+                  alt=""
+                />
+              </div>
+              <div class="user-left">
+                <div class="left-a">
+                  <div class="name">
+                    <span  class="user-name">西蒙789:</span>
+                    <span>李荣浩虐爆各种小鲜肉</span>
+                  </div>
+                  <div class="date">
+                    <span>2018-10-04 17:00:45</span>
+                  </div>
+                </div>
+                <div class="icon">
+                  <span>赞</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </el-tab-pane>
       </el-tabs>
     </div>
   </div>
@@ -217,6 +245,7 @@ export default {
       .desc {
         height: 21px;
         font-size: 15px;
+        overflow: hidden;
       }
     }
   }
@@ -334,22 +363,73 @@ export default {
     }
   }
 }
-#list{
+#list {
   overflow: visible;
   position: relative;
 }
-.el-tabs   .el-tabs__content{
-  overflow:   visible;
-
+.el-tabs .el-tabs__content {
+  overflow: visible;
 }
 
 .el-tabs__content {
-    overflow: visible;
-    position: relative;
+  overflow: visible;
+  position: relative;
 }
 .footer .el-pagination {
   margin: 30px 10px;
   text-align: right;
   margin-bottom: 75px;
+}
+.all .description-all {
+  width: 100%;
+
+  .users {
+    // height: 90px;
+    width: 100%;
+    display: flex;
+    line-height: 16.8px;
+    color: #4a4a4a;
+    font-size: 14px;
+    padding:20px  0 0;
+    // justify-content: flex-start;
+    .image-a {
+      // width: 100%;
+      // height: 90px;
+      width: 43px;
+      .image-b {
+        width: 43px;
+        height: 43px;
+        border-radius: 50%;
+        line-height: 16.8px;
+      }
+    }
+  }
+  .user-left {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    .left-a {
+      display: flex;
+      flex-direction: column;
+      // justify-content: flex-start;
+      justify-content:  space-between;
+      font-size: 12px;
+      line-height: 14.4px;
+      margin-left: 20px;
+      .name{
+        .user-name{
+          color:#517eaf;
+          display: inline-block;
+          line-height: 14.4px;
+          margin:0 4px 0 0;
+        }
+      }
+      .date{
+          color: #bebebe;
+          font-size: 12.8px;
+          line-height: 16px;
+      }
+    }
+  }
 }
 </style>
