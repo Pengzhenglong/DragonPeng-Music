@@ -14,7 +14,7 @@
           <router-link tag="li" to="/songs"><span>最新音乐</span></router-link>
 
           <router-link tag="li" to="/mvs"><span>最新mv</span> </router-link>
-            <router-link tag="li" to="/playlist"><span>专辑列表</span> </router-link>
+
         </ul>
       </div>
     </div>
@@ -47,7 +47,7 @@ import discovery from '../views/Discovery.vue'
 import playlists from '../views/Playlists.vue'
 import songs from '../views/Songs.vue'
 import mvs from '../views/Mvs.vue'
-import playlist from '../views/Playlist.vue'
+
 export default {
   data() {
     return {
@@ -79,7 +79,7 @@ export default {
     playlists,
     songs,
     mvs,
-    playlist
+
   }
 }
 </script>

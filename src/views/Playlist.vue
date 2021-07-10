@@ -88,11 +88,17 @@
       current-page 当前页
       page-size 每页多少条数据
       current-change 页码改变事件
-     -->
-                <div class="footer"></div>
+     --><div class="footer">
+          <el-pagination background layout="prev, pager, next" :total="1000">
+          </el-pagination>
+        </div>
+
+
               </div>
             </div>
           </div>
+
+
         </el-tab-pane>
         <el-tab-pane label="评论" name="lists" > </el-tab-pane>
       </el-tabs>
@@ -126,7 +132,7 @@ export default {
 }
 </script>
 
-<style lang="scss"  scoped>
+<style lang="scss"  >
 .all {
   max-width: 1100px;
   margin: 0;
@@ -340,5 +346,10 @@ export default {
 .el-tabs__content {
     overflow: visible;
     position: relative;
+}
+.footer .el-pagination {
+  margin: 30px 10px;
+  text-align: right;
+  margin-bottom: 75px;
 }
 </style>
