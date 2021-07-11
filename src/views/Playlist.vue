@@ -102,28 +102,53 @@
           </div>
         </el-tab-pane>
         <el-tab-pane label="评论" name="lists">
+          <!-- 精彩评论 -->
           <div class="description-all">
             <h4>精彩评论</h4>
-            <div class="users"  v-for="(item,index)  of  comments"  :key="index">
+            <div class="users" v-for="(item, index) of hotcomments" :key="index">
               <div class="image-a">
-                <img
-                  class="image-b"
-                  :src="item.user.avatarUrl"
-                  alt=""
-                />
+                <img class="image-b" :src="item.user.avatarUrl" alt="" />
               </div>
               <div class="user-left">
                 <div class="left-a">
                   <div class="name">
-                    <span class="user-name">{{item.user.nickname}}:</span>
-                    <span>{{item.content}}</span>
+                    <span class="user-name">{{ item.user.nickname }}:</span>
+                    <span>{{ item.content }}</span>
                   </div>
                   <div class="date">
                     <span>2018-10-04 17:00:45</span>
                   </div>
                 </div>
                 <div class="icon">
-                  <span>{{item.likedCount}}赞</span>
+                  <span>{{ item.likedCount }}赞</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 最新评论 -->
+          <div class="description-all">
+            <h4>最新评论</h4>
+            <div
+              class="users"
+              v-for="(item, index) of comments"
+              :key="index"
+            >
+              <div class="image-a">
+                <img class="image-b" :src="item.user.avatarUrl" alt="" />
+              </div>
+              <div class="user-left">
+                <div class="left-a">
+                  <div class="name">
+                    <span class="user-name">{{ item.user.nickname }}:</span>
+                    <span>{{ item.content }}</span>
+                  </div>
+                  <div class="date">
+                    <span>2018-10-04 17:00:45</span>
+                  </div>
+                </div>
+                <div class="icon">
+                  <span>{{ item.likedCount }}赞</span>
                 </div>
               </div>
             </div>
@@ -140,7 +165,8 @@ export default {
     return {
       activeIndex: 'songs',
       playlist: [],
-      comments: []
+      comments: [],
+      hotcomments: []
     }
   },
   methods: {
@@ -154,25 +180,41 @@ export default {
       this.playlist = data.playlist
       // console.log(this.playlist)
     },
-    // 获取评论
-    async getcomments() {
+    // 获取精彩评论
+    async gethotcomments() {
       const { data: comment } = await this.$axios.get('/comment/hot', {
         params: {
-         id: this.$route.query.q,
-        // 传递类型
-        type: 2
+          id: this.$route.query.q,
+          // 传递类型
+          type: 2
         }
       })
       // console.log(data);
       // console.log(comment)
-      this.comments = comment.hotComments;
-      console.log(this.comments)
+      this.hotcomments = comment.hotComments;
+      // console.log(this.comments)
       // this.playlist = data.playlist
       // console.log(this.playlist)
+    },
+    // 获取最新评论
+    async getcomments() {
+      const { data: comment } = await this.$axios.get('/comment/playlist', {
+        params: {
+          id: this.$route.query.q,
+          limit: 10,
+          offset: 0
+        }
+      })
+      // console.log(data);
+      // console.log(comment)
+      this.comments = comment.comments;
+      // console.log(this.comments)
+
     }
   },
   async created() {
     this.getlist();
+    this.gethotcomments()
     this.getcomments()
   }
 }
