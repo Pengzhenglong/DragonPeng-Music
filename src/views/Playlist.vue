@@ -104,26 +104,26 @@
         <el-tab-pane label="评论" name="lists">
           <div class="description-all">
             <h4>精彩评论</h4>
-            <div class="users">
+            <div class="users"  v-for="(item,index)  of  comments"  :key="index">
               <div class="image-a">
                 <img
                   class="image-b"
-                  src="https://p4.music.126.net/1_mACXIu1NrdVjv-8gVKDA==/109951164935604526.jpg?param=80y80"
+                  :src="item.user.avatarUrl"
                   alt=""
                 />
               </div>
               <div class="user-left">
                 <div class="left-a">
                   <div class="name">
-                    <span  class="user-name">西蒙789:</span>
-                    <span>李荣浩虐爆各种小鲜肉</span>
+                    <span class="user-name">{{item.user.nickname}}:</span>
+                    <span>{{item.content}}</span>
                   </div>
                   <div class="date">
                     <span>2018-10-04 17:00:45</span>
                   </div>
                 </div>
                 <div class="icon">
-                  <span>赞</span>
+                  <span>{{item.likedCount}}赞</span>
                 </div>
               </div>
             </div>
@@ -139,23 +139,41 @@ export default {
   data() {
     return {
       activeIndex: 'songs',
-      playlist: []
+      playlist: [],
+      comments: []
     }
   },
   methods: {
     async getlist() {
-      const { data: data } = await this.$axios.get('playlist/detail', {
+      const { data: data } = await this.$axios.get('/playlist/detail', {
         params: {
           id: this.$route.query.q
         }
       })
       // console.log(data);
       this.playlist = data.playlist
-      console.log(this.playlist)
+      // console.log(this.playlist)
+    },
+    // 获取评论
+    async getcomments() {
+      const { data: comment } = await this.$axios.get('/comment/hot', {
+        params: {
+         id: this.$route.query.q,
+        // 传递类型
+        type: 2
+        }
+      })
+      // console.log(data);
+      // console.log(comment)
+      this.comments = comment.hotComments;
+      console.log(this.comments)
+      // this.playlist = data.playlist
+      // console.log(this.playlist)
     }
   },
   async created() {
-    this.getlist()
+    this.getlist();
+    this.getcomments()
   }
 }
 </script>
@@ -390,7 +408,7 @@ export default {
     line-height: 16.8px;
     color: #4a4a4a;
     font-size: 14px;
-    padding:20px  0 0;
+    padding: 20px 0 0;
     // justify-content: flex-start;
     .image-a {
       // width: 100%;
@@ -412,22 +430,22 @@ export default {
       display: flex;
       flex-direction: column;
       // justify-content: flex-start;
-      justify-content:  space-between;
+      justify-content: space-between;
       font-size: 12px;
       line-height: 14.4px;
       margin-left: 20px;
-      .name{
-        .user-name{
-          color:#517eaf;
+      .name {
+        .user-name {
+          color: #517eaf;
           display: inline-block;
           line-height: 14.4px;
-          margin:0 4px 0 0;
+          margin: 0 4px 0 0;
         }
       }
-      .date{
-          color: #bebebe;
-          font-size: 12.8px;
-          line-height: 16px;
+      .date {
+        color: #bebebe;
+        font-size: 12.8px;
+        line-height: 16px;
       }
     }
   }
