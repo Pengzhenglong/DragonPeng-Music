@@ -56,7 +56,7 @@
         <div class="mvs">
           <!-- <h3 class="title">推荐MV</h3> -->
           <div class="mv">
-            <div class="items" v-for="(item, index) in mv" :key="index">
+            <div class="items" v-for="(item, index) in mv" :key="index"  @click="toMv(item.id)">
               <div class="right">
                 <div class="img-a">
                   <img :src="item.cover" alt="" />
@@ -191,7 +191,9 @@ export default {
     this.getSongList()
   },
   methods: {
-
+  async  toMv(id){
+   this.$router.push(`/mv?q=${id}`)
+},
     async getSongList() {
       const { data: data } = await this.$axios.get('/search', {
         params: {

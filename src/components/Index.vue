@@ -15,7 +15,7 @@
 
           <router-link tag="li" to="/mvs"><span>最新mv</span> </router-link>
 
-          <router-link tag="li" to="/mv"><span>最新mvvv</span> </router-link>
+          <!-- <router-link tag="li" to="/mv"><span>最新mvvv</span> </router-link> -->
         </ul>
       </div>
     </div>
@@ -48,7 +48,7 @@ import discovery from '../views/Discovery.vue'
 import playlists from '../views/Playlists.vue'
 import songs from '../views/Songs.vue'
 import mvs from '../views/Mvs.vue'
-import mv from '../views/Mv'
+// import mv from '../views/Mv'
 export default {
   data() {
     return {
@@ -80,7 +80,7 @@ export default {
     playlists,
     songs,
     mvs,
-    mv
+    // mv
 
   }
 }

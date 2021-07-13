@@ -4,31 +4,26 @@
       <div class="title">
         <p>mv详情</p>
       </div>
-      <video
-        class="video"
-        autoplay
-        controls
-        src="http://vodkgeyttp8.vod.126.net/cloudmusic/obj/core/1313544841/cd5b37b620345185715edad3ff37a954.mp4?wsSecret=51e822a387ad3066fc075ba042b7a263&wsTime=1626137324"
-      ></video>
+      <video class="video" autoplay controls :src="url"></video>
       <div class="author">
         <div class="author-img">
           <img
-            src="https://p1.music.126.net/S4wAdHGJcAfxUCH-7u-q9Q==/109951164675182696.jpg?param=120y120"
+            :src="icon"
             alt=""
           />
         </div>
-        <div class="author-name"><p>cignature</p></div>
+        <div class="author-name"><p>{{mvInfo.artistName}}</p></div>
       </div>
       <p class="mv-name">
-        눈누난나(Nun nu nan na) | SBS The Show 20/02/11 现场版
+        {{mvInfo.name }}
       </p>
       <div class="desc">
         <span class="data">发布：2020-02-11</span>
-        <span class="count">播放：1671次</span>
+        <span class="count">播放：{{ mvInfo.playCount }}次</span>
       </div>
       <!-- 最新评论 -->
       <div class="description-all">
-        <h4>最新评论</h4>
+        <h4>最新评论({{ total }})</h4>
         <div class="users" v-for="(item, index) of comments" :key="index">
           <div class="image-a">
             <img class="image-b" :src="item.user.avatarUrl" alt="" />
@@ -38,7 +33,7 @@
               <div class="name">
                 <span class="user-name">{{ item.user.nickname }}:</span>
                 <span>{{ item.content }}</span>
-                <span>{{ item.content }}</span>
+                <!-- <span>{{ item.content }}</span> -->
               </div>
               <div class="date">
                 <span>2018-10-04 17:00:45</span>
@@ -54,17 +49,13 @@
     <div class="right">
       <div class="right-title">
         <p>相关推荐</p>
-        <div class="right-mv">
+        <div class="right-mv" v-for="(item, index) of semimv" :key="index">
           <div class="right-img">
-            <img
-              class="image"
-              src="http://p3.music.126.net/piUcjYkYtfmgup62at7idw==/109951164677811503.jpg?param=500y260"
-              alt=""
-            />
+            <img class="image" :src="item.cover" alt="" />
           </div>
           <div class="right-name">
-            <div class="name-top">눈누난나 (Nun Nu Nan Na</div>
-            <div class="name-des">by cignature</div>
+            <div class="name-top">{{ item.name }}</div>
+            <div class="name-des">{{ item.artistName }}</div>
           </div>
         </div>
       </div>
@@ -74,7 +65,88 @@
 
 <script>
 export default {
-  name: 'mv'
+  name: 'mv',
+  data() {
+    return {
+      // mv地址
+      url: "",
+      semimv: [],
+      comments: [],
+      total: '',
+      mvInfo: {},
+      icon: ''
+    }
+
+  },
+  methods: {
+    // mv播放地址    /mv/url
+    async getUrl() {
+      const { data: urls } = await this.$axios.get('/mv/url', {
+        params: {
+          id: this.$route.query.q
+        }
+      })
+      // console.log(data)
+      this.url = urls.data.url
+      // console.log(this.url)
+    },
+    //右侧相关mv     /simi/mv
+
+    async getSimiMV() {
+      const { data: simi } = await this.$axios.get('/simi/mv', {
+        params: {
+          mvid: this.$route.query.q
+        }
+      })
+      // console.log(simi)
+      if (simi.code == 200) {
+        this.semimv = simi.mvs
+      }
+      // console.log(this.semimv)
+    },
+    //获取评论数据     /comment/mv
+    async getcomment() {
+      const { data: comment } = await this.$axios.get('/comment/mv', {
+        params: {
+          id: this.$route.query.q,
+          limit: 10,
+          offset: 0
+        }
+      })
+      // console.log(comment)
+      if (comment.code == 200) {
+        this.comments = comment.comments
+        this.total = comment.total
+      }
+      // console.log(this.comments)
+      // console.log(this.total)
+    },
+    // 获取 mv的信息
+    async getmvInfo() {
+      const { data: mvInfos } = await this.$axios.get('/mv/detail', {
+        params: {
+          mvid: this.$route.query.q
+        }
+      })
+      //  console.log(mvInfo)
+      this.mvInfo = mvInfos.data
+      console.log(this.mvInfo)
+      const { data: artists } = await this.$axios.get('/artists', {
+        params: {
+          id: this.mvInfo.artists[0].id
+        }
+      })
+      console.log(artists)
+      // 歌手的封面信息
+      this.icon = artists.artist.picUrl
+    }
+  },
+  created() {
+    this.getUrl()
+    this.getSimiMV()
+    this.getcomment()
+    this.getmvInfo()
+  }
 }
 </script>
 
@@ -181,6 +253,7 @@ export default {
   .right {
     position: relative;
     width: 40%;
+
     // background-color: red;
     .right-title {
       position: relative;
@@ -194,12 +267,13 @@ export default {
           width: 150px;
           height: 83px;
           .image {
-            width: 100%;
-            height: 100%;
+            width: 150px;
+            height: 83px;
             border-radius: 5px;
           }
         }
         .right-name {
+          width: 190px;
           color: #4a4a4a;
           font-size: 15px;
           margin: 0 0 0 10px;
@@ -211,12 +285,16 @@ export default {
             font-size: 14px;
             line-height: 16px;
             margin: 0 0 4px;
+            text-overflow: ellipsis;
+
+            overflow: hidden;
+            white-space: nowrap;
           }
-          .name-des {
-            color: #bebebe;
-            font-size: 13px;
-            line-height: 15px;
-          }
+        }
+        .name-des {
+          color: #bebebe;
+          font-size: 13px;
+          line-height: 15px;
         }
       }
     }

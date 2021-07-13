@@ -142,7 +142,7 @@
                   <div class="name">
                     <span class="user-name">{{ item.user.nickname }}:</span>
                     <span>{{ item.content }}</span>
-                    <span>{{ item.content }}</span>
+                    <!-- <span>{{ item.content }}</span> -->
                   </div>
                   <div class="date">
                     <span>2018-10-04 17:00:45</span>

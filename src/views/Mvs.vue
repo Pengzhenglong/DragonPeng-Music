@@ -148,7 +148,7 @@
     <!-- 推荐MV -->
     <div class="mvs">
       <div class="items">
-        <div class="item" v-for="(item, index) in list" :key="index">
+        <div class="item" v-for="(item, index) in list" :key="index"  @click="toMv(item.id)">
           <div class="img-wrap">
             <img :src="item.cover" alt="" />
             <div class="num-wrap">
@@ -227,7 +227,9 @@ export default {
     this.getList()
   },
   methods: {
-
+    async  toMv(id){
+      this.$router.push(`/mv?q=${id}`)
+    },
     async getList() {
       const { data: list } = await this.$axios.get('/mv/all', {
 
