@@ -138,12 +138,13 @@ export default {
 .main {
   z-index: 1000;
   flex: 1;
-
+ min-width: 50px;
   /* overflow-y: scroll; */
 }
 .index .main > div {
   max-width: 1100px;
   margin: 0 auto;
+      
 }
 .bottom {
   /* 显示在上 */

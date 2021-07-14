@@ -12,7 +12,7 @@
     <div class="recommend">
       <h3 class="title">推荐歌单</h3>
       <div class="box">
-        <div class="items" v-for="(item, index) in list" :key="index">
+        <div class="items" v-for="(item, index) in list" :key="index"  @click="toPlaylist(item.id)">
           <div class="item">
             <div class="hot">
               <span>{{ item.copywriter }}</span>
@@ -82,6 +82,9 @@ export default {
     }
   },
   methods:{
+     async toPlaylist(id){
+          this.$router.push(`/playlist/?q=${id}`)
+     },
     // 点击按钮，播放音乐
       async   playMusic(id){
       //  console.log(id)

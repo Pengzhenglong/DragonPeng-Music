@@ -95,7 +95,7 @@
         >
       </div>
       <div class="box">
-        <div class="items" v-for="(item, index) in palylist" :key="index">
+        <div class="items" v-for="(item, index) in palylist" :key="index"  @click="toPlaylist(item.id)">
           <div class="item">
             <div class="hot">
               播放量：
@@ -142,6 +142,9 @@ export default {
     }
   },
   methods: {
+      async toPlaylist(id){
+            this.$router.push(`/playlist/?q=${id}`)
+      },
     handleCurrentchange(val){
       // 字符串模板 变量名可以写在${}中
         // console.log(`当前页：${val}`)
