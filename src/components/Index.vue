@@ -1,7 +1,30 @@
 <template>
   <div class="index">
-    <div class="left">
+    <div class="left">      
+<!-- 
+      <el-row class="tac">
+  <el-col :span="12">
+
+    <el-menu
+      default-active="2"
+      class="el-menu-vertical-demo"
+      @open="handleOpen"
+      @close="handleClose">
+
+      <el-menu-item index="2">
+        <i class="el-icon-menu"></i>
+        <span slot="title">导航二</span>
+      </el-menu-item>
+
+    </el-menu>
+  </el-col>
+ 
+</el-row> -->
       <div class="nav">
+ 
+    
+
+ 
         <ul>
           <router-link tag="li" to="/discovery"
             ><span>发现音乐</span>
@@ -15,7 +38,7 @@
 
           <router-link tag="li" to="/mvs"><span>最新mv</span> </router-link>
 
-          <!-- <router-link tag="li" to="/mv"><span>最新mvvv</span> </router-link> -->
+        
         </ul>
       </div>
     </div>
@@ -49,10 +72,20 @@ import playlists from '../views/Playlists.vue'
 import songs from '../views/Songs.vue'
 import mvs from '../views/Mvs.vue'
 // import mv from '../views/Mv'
+import { mapState } from 'vuex'
 export default {
+  components: {
+    discovery,
+    playlists,
+    songs,
+    mvs,
+    // mv
+
+  },
   data() {
     return {
-      musicUrl: 'http://m801.music.126.net/20210702174302/fbe2aafe5c00f402df761abbc88ca65b/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/9524435525/2897/d82f/77aa/f9a4a521bf1985b6156e780b0024beb3.mp3',
+      // musicUrl: 'http://m801.music.126.net/20210702174302/fbe2aafe5c00f402df761abbc88ca65b/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/9524435525/2897/d82f/77aa/f9a4a521bf1985b6156e780b0024beb3.mp3',
+      musicUrl: '',
       // 播放列表最大高度
       // listMaxHeight: '130',
       // 设置播放器的音量
@@ -75,14 +108,15 @@ export default {
 
     }
   },
-  components: {
-    discovery,
-    playlists,
-    songs,
-    mvs,
-    // mv
-
+  computed: {
+    ...mapState(['musicUrl'])
+  
+  },
+  mounted() {
+    // console.log(this.$store.state.musicUrl)
+    // this.musicUrl = this.$store.state.musicUrl
   }
+
 }
 </script>
 <style >
@@ -138,13 +172,12 @@ export default {
 .main {
   z-index: 1000;
   flex: 1;
- min-width: 50px;
+  min-width: 50px;
   /* overflow-y: scroll; */
 }
 .index .main > div {
   max-width: 1100px;
   margin: 0 auto;
-      
 }
 .bottom {
   /* 显示在上 */

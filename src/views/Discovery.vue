@@ -51,7 +51,7 @@
     <div class="mvs">
       <h3 class="title">推荐MV</h3>
       <div class="mv">
-        <div class="items" v-for="(item, index) in mvs" :key="index">
+        <div class="items" v-for="(item, index) in mvs" :key="index"  @click="toMv(item.id)">
           <div class="right">
             <div class="img-a">
               <img :src="item.picUrl" alt="" />
@@ -82,6 +82,9 @@ export default {
     }
   },
   methods:{
+   async   toMv(id){
+        this.$router.push(`/mv/?q=${id}`)
+    },
      async toPlaylist(id){
           this.$router.push(`/playlist/?q=${id}`)
      },
