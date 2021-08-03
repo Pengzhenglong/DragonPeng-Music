@@ -100,6 +100,7 @@ export default {
       let  url=music.data[0].url
       console.log(url)
       this.$parent.musicUrl=url
+      // this.$emit('musicUrl',url)
       }
   },
   async created() {

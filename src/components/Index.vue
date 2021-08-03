@@ -46,7 +46,7 @@
       <router-view />
     </div>
     <div class="bottom">
-      <audio :src="musicUrl" controls></audio>
+      <audio :src="musicUrl" controls  autoplay></audio>
       <!-- <aplayer
         ref="aplayer"
         :audio="audioInfo"
@@ -108,13 +108,19 @@ export default {
 
     }
   },
+  methods:{
+  //  async   Url(url){
+  //         // console.log(id )
+  //       this.musicUrl=url
+  //     }
+  },
   computed: {
-    ...mapState(['musicUrl'])
+    // ...mapState(['musicUrl'])
   
   },
   mounted() {
     // console.log(this.$store.state.musicUrl)
-    // this.musicUrl = this.$store.state.musicUrl
+    this.musicUrl = this.$store.state.musicUrl
   }
 
 }

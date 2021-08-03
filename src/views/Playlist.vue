@@ -59,6 +59,7 @@
                   class="items"
                   v-for="(item, index) in playlist.tracks"
                   :key="index"
+            
                 >
                   <div class="number">
                     {{ index + 1 }}
@@ -171,6 +172,18 @@ export default {
     }
   },
   methods: {
+  async  playMusic(id){
+     //  console.log(id)
+      const  {data:  music}  =await  this.$axios.get('/song/url',{
+        params:{
+              id
+        }
+      })
+      // console.log(music)
+      let  url=music.data[0].url
+      console.log(url)
+      this.$parent.musicUrl=url
+    },
     async getlist() {
       const { data: data } = await this.$axios.get('/playlist/detail', {
         params: {
