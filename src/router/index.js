@@ -1,13 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Discovery from '../views/Discovery.vue'
+import Mvs from '../views/Mvs.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
- redirect:'/discovery'
+    redirect: '/discovery'
   },
   {
     path: '/discovery',
@@ -17,6 +18,7 @@ const routes = [
   {
     path: '/mvs',
     name: 'Mvs',
+    // component: Mvs
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -28,7 +30,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Mv.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/mv.vue')
   },
   {
     path: '/playlists',

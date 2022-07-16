@@ -1,7 +1,7 @@
 <template>
   <div class="index">
-    <div class="left">      
-<!-- 
+    <div class="left">
+      <!-- 
       <el-row class="tac">
   <el-col :span="12">
 
@@ -21,24 +21,30 @@
  
 </el-row> -->
       <div class="nav">
- 
-    
 
- 
         <ul>
-          <router-link tag="li" to="/discovery"
-            ><span>发现音乐</span>
+          <router-link
+            tag="li"
+            to="/discovery"
+          ><span>发现音乐</span>
           </router-link>
 
-          <router-link tag="li" to="/playlists"
-            ><span>推荐歌单</span>
+          <router-link
+            tag="li"
+            to="/playlists"
+          ><span>推荐歌单</span>
           </router-link>
 
-          <router-link tag="li" to="/songs"><span>最新音乐</span></router-link>
+          <router-link
+            tag="li"
+            to="/songs"
+          ><span>最新音乐</span></router-link>
 
-          <router-link tag="li" to="/mvs"><span>最新mv</span> </router-link>
+          <router-link
+            tag="li"
+            to="/mvs"
+          ><span>最新mv</span> </router-link>
 
-        
         </ul>
       </div>
     </div>
@@ -46,7 +52,11 @@
       <router-view />
     </div>
     <div class="bottom">
-      <audio :src="musicUrl" controls  autoplay></audio>
+      <audio
+        :src="musicUrl"
+        controls
+        autoplay
+      ></audio>
       <!-- <aplayer
         ref="aplayer"
         :audio="audioInfo"
@@ -82,7 +92,7 @@ export default {
     // mv
 
   },
-  data() {
+  data () {
     return {
       // musicUrl: 'http://m801.music.126.net/20210702174302/fbe2aafe5c00f402df761abbc88ca65b/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/9524435525/2897/d82f/77aa/f9a4a521bf1985b6156e780b0024beb3.mp3',
       musicUrl: '',
@@ -108,17 +118,17 @@ export default {
 
     }
   },
-  methods:{
-  //  async   Url(url){
-  //         // console.log(id )
-  //       this.musicUrl=url
-  //     }
+  methods: {
+    //  async   Url(url){
+    //         // console.log(id )
+    //       this.musicUrl=url
+    //     }
   },
   computed: {
     // ...mapState(['musicUrl'])
-  
+
   },
-  mounted() {
+  mounted () {
     // console.log(this.$store.state.musicUrl)
     this.musicUrl = this.$store.state.musicUrl
   }

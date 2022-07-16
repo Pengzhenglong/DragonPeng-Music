@@ -65,7 +65,7 @@
 
 <script>
 export default {
-  name: 'mv',
+  name: 'Mv',
   data() {
     return {
       // mv地址

@@ -25,14 +25,14 @@
 
 export default {
   name: 'top',
-  data() {
+  data () {
     return {
       // 输入的内容
       inputValue: ''
     };
   },
   methods: {
-    toResult() {
+    toResult () {
       // 非空判断
       if (this.inputValue == '') {
         // 提示用户
@@ -55,16 +55,15 @@ export default {
   top: 0;
   left: 0;
   background-color: #fff;
-    z-index:10000;
+  z-index: 10000;
 }
 .top {
   display: flex;
   align-items: center;
   height: 46px;
   background-color: #f9f9f9;
-  z-index:10000;
-  
-}  
+  z-index: 10000;
+}
 .center {
   margin: 0 auto;
 }

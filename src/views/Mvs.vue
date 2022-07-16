@@ -180,7 +180,7 @@
 
 // 导入 axios
 export default {
-  name: 'mvs',
+  name: 'Mvs',
   data() {
     return {
       // 总条数
